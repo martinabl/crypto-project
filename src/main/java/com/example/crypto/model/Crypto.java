@@ -1,4 +1,4 @@
-package model;
+package com.example.crypto.model;
 
 public class Crypto {
     private Integer id;
