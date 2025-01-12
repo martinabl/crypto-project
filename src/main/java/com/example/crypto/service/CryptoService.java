@@ -14,10 +14,10 @@ public class CryptoService {
 
     private final List<Crypto> portfolio = new ArrayList<>();
 
-    private Integer currentId = 1;
-
     public Crypto addCrypto(Crypto crypto) {
-        crypto.setId(currentId++);
+        if (portfolio.stream().anyMatch(existingCrypto -> existingCrypto.getId().equals(crypto.getId()))) {
+            throw new IllegalArgumentException("Kryptoměna s tímto ID již existuje.");
+        }
         portfolio.add(crypto);
         return crypto;
     }

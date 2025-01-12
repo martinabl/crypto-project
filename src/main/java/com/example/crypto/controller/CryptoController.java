@@ -18,8 +18,12 @@ public class CryptoController {
     }
 
     @PostMapping
-    public ResponseEntity<Crypto> addCrypto(@RequestBody Crypto crypto) {
-        return ResponseEntity.ok(cryptoService.addCrypto(crypto));
+    public ResponseEntity<?> addCrypto(@RequestBody Crypto crypto) {
+        try {
+            return ResponseEntity.ok(cryptoService.addCrypto(crypto));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @GetMapping
